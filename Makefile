@@ -8,9 +8,12 @@ DIR_INC = inc
 DIR_LIBFT = libft
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
-SRC = $(DIR_SRC)/push_swap.c $(DIR_SRC)/arg_check.c
+SRC =	$(DIR_SRC)/push_swap.c \
+		$(DIR_SRC)/arg_check.c \
+		$(DIR_SRC)/get_array.c \
+		$(DIR_SRC)/sort.c \
 
 INCLUDES_H = -I$(DIR_INC) -I$(DIR_LIBFT)
 INCLUDES_LIB = -L$(DIR_LIBFT) -l$(NAME_LIBFT)
