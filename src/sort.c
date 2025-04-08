@@ -13,15 +13,84 @@ void	sort(t_array *array)
 
 void	final_sort(t_array *array)
 {
+	int tmp;
 	int i;
+	t_operation op;
 
-	i = 0;
-	while (i < array->size_top)
+	op.a_index = array->size_a - 1;
+	op.b_index = array->big_b_index;
+
+	if (array->size_a == 2)
 	{
-		printf("%d ", array->numbers[array->size_top - i - 1]);
+		if (array->numbers[0] < array->numbers[1])
+			write(1, "sa\n", 3);
+		tmp = array->numbers[0];
+		array->numbers[0] = array->numbers[1];
+		array->numbers[1] = tmp;
+	}
+	if (array->size_a == 3)
+	{
+		if (array->numbers[0] > array->numbers[1] && array->numbers[1] < array->numbers[2])
+		{
+			write(1, "sa\n", 3);
+			tmp = array->numbers[0];
+			array->numbers[0] = array->numbers[1];
+			array->numbers[1] = tmp;
+		}
+		else if (array->numbers[0] > array->numbers[1] && array->numbers[1] < array->numbers[2])
+		{
+			write(1, "rra\n", 3);
+			tmp = array->numbers[0];
+			array->numbers[0] = array->numbers[1];
+			array->numbers[1] = tmp;
+		}
+		if (array->numbers[0] < array->numbers[1] && array->numbers[1] > array->numbers[2])
+		{
+			write(1, "sa\n", 3);
+			write(1, "ra\n", 3);
+			tmp = array->numbers[0];
+			array->numbers[0] = array->numbers[1];
+			array->numbers[1] = tmp;
+		}
+		if (array->numbers[0] < array->numbers[1] && array->numbers[1] > array->numbers[2])
+		{
+			write(1, "rra\n", 4);
+			tmp = array->numbers[0];
+			array->numbers[0] = array->numbers[1];
+			array->numbers[1] = tmp;
+		}
+		if (array->numbers[0] < array->numbers[1] && array->numbers[1] < array->numbers[2])
+		{
+			write(1, "sa\n", 3);
+			write(1, "rra\n", 4);
+			tmp = array->numbers[0];
+			array->numbers[0] = array->numbers[1];
+			array->numbers[1] = tmp;
+		}
+	}
+
+	i = array->size_a;
+	while (i < array->big_b_index)
+	{
+		write (1, "rb\n", 4);
 		i++;
 	}
-		
+	apply_operation(op, array);
+	array->size_a++;
+	i = 0;
+	while (array->size_a != array->size_top)
+	{
+		if (array->numbers[i] > array->numbers[array->size_a] && i != 3)
+		{
+			write(1, "rra\n", 4);
+			i++;
+			continue;
+		}
+		write(1, "pa\n", 3);
+		array->size_a++;
+	}
+	while (i++ < 3)
+		write(1, "rra\n", 4);
 	exit(0);
 }
 
@@ -47,6 +116,20 @@ void	push_easiest(t_array *array)
 				op.ra_count--;
 			}
 		}
+		else
+		{
+			while (op.ra_count > 0)
+			{
+				write(1, "rr\n", 3);
+				op.ra_count--;
+				op.rb_count--;
+			}
+			while (op.rb_count > 0)
+			{
+				write(1, "rb\n", 3);
+				op.rb_count--;
+			}
+		}
 	}
 	else if (op.ra_count < 0 && op.rb_count < 0)
 	{
@@ -62,6 +145,20 @@ void	push_easiest(t_array *array)
 			{
 				write(1, "rrb\n", 4);
 				op.rb_count++;
+			}
+		}
+		else
+		{
+			while (op.rb_count < 0)
+			{
+				write(1, "rrr\n", 4);
+				op.rb_count++;
+				op.ra_count++;
+			}
+			while (op.ra_count < 0)
+			{
+				write(1, "rra\n", 4);
+				op.ra_count++;
 			}
 		}
 	}
@@ -91,48 +188,36 @@ void	push_easiest(t_array *array)
 			op.rb_count--;
 		}
 	}
-	else
-	{
-		while (op.ra_count > 0)
-		{
-			write(1, "ra\n", 3);
-			op.ra_count--;
-		}
-		while (op.rb_count > 0)
-		{
-			write(1, "rb\n", 3);
-			op.rb_count--;
-		}
-	}
+	write(1, "pb\n", 3);
 }
 
 t_operation	get_easiest(t_array *array)
 {
 	t_operation op;
+	int a_index;
+	int b_index;
 
-	op.a_index = 0;
-	op.b_index = array->size_a;
+	a_index = 0;
+	b_index = 0;
 	op.cost = -1;
-	while (op.a_index < array->size_a)
+	while (a_index < array->size_a)
 	{
-		if (array->numbers[op.a_index] > array->big_b || array->numbers[op.a_index] < array->low_b)
+		if (array->numbers[a_index] > array->big_b || array->numbers[a_index] < array->low_b)
 		{
-			calc_cost(&op, op.a_index, array->big_b_index, array);
+			calc_cost(&op, a_index, array->big_b_index, array);
 		}
 		else
 		{
-			while (op.b_index < array->size_top)
+			while (array->size_a + b_index < array->size_top)
 			{
-				if (array->numbers[op.a_index] > array->numbers[op.b_index]
-					&& array->numbers[op.a_index] < array->numbers[op.b_index + 1])
-					calc_cost(&op, op.a_index, op.b_index + 1, array);
-				op.b_index++;
+				if (array->numbers[a_index] > array->numbers[array->size_a + b_index]
+					&& array->numbers[a_index] < array->numbers[array->size_a + ((b_index + 1) % (array->size_top - array->size_a))])
+					calc_cost(&op, a_index, array->size_a + ((b_index + 1) % (array->size_top - array->size_a)), array);
+				b_index++;
 			}
-			op.b_index--;
 		}
-		op.a_index++;
+		a_index++;
 	}
-	op.a_index--;
 	return (op);
 }
 
@@ -173,6 +258,8 @@ void	calc_cost(t_operation *op, int a_index, int b_index, t_array *array)
 		op->cost = cost;
 		op->ra_count = ra_count;
 		op->rb_count = rb_count;
+		op->a_index = a_index;
+		op->b_index = b_index;
 	}
 	ra_count = a_index + 1;
 	rb_count = array->size_top - b_index;
@@ -185,6 +272,8 @@ void	calc_cost(t_operation *op, int a_index, int b_index, t_array *array)
 		op->cost = cost;
 		op->ra_count = -ra_count;
 		op->rb_count = -rb_count;
+		op->a_index = a_index;
+		op->b_index = b_index;
 	}
 	ra_count = array->size_a - a_index - 1;
 	rb_count = array->size_top - b_index;
@@ -194,6 +283,8 @@ void	calc_cost(t_operation *op, int a_index, int b_index, t_array *array)
 		op->cost = cost;
 		op->ra_count = ra_count;
 		op->rb_count = -rb_count;
+		op->a_index = a_index;
+		op->b_index = b_index;
 	}
 	ra_count = a_index + 1;
 	rb_count = b_index - array->size_a;
@@ -203,6 +294,8 @@ void	calc_cost(t_operation *op, int a_index, int b_index, t_array *array)
 		op->cost = cost;
 		op->ra_count = -ra_count;
 		op->rb_count = rb_count;
+		op->a_index = a_index;
+		op->b_index = b_index;
 	}
 }
 
@@ -210,19 +303,18 @@ void	apply_operation(t_operation op, t_array *array)
 {
 	int *tmp;
 
-	tmp = malloc(sizeof(int) * op.a_index);
-	ft_memcpy(tmp, array->numbers + op.a_index + 1, sizeof(int) * (array->size_a - op.a_index - 1));
-	ft_memcpy(array->numbers, array->numbers + array->size_a - op.a_index -1, sizeof(int) * (op.a_index -1));
-	ft_memcpy(array->numbers, tmp, sizeof(int) * (array->size_a - op.a_index - 1));
+	tmp = malloc(sizeof(int) * (op.a_index + 1));
+	ft_memcpy(tmp, array->numbers, sizeof(int) * (op.a_index + 1));
+	ft_memcpy(array->numbers, array->numbers + op.a_index + 1, sizeof(int) * (array->size_a - op.a_index - 1));
+	ft_memcpy(array->numbers + array->size_a - op.a_index -1, tmp, sizeof(int) * (op.a_index + 1));
 	free(tmp);
-	tmp = malloc(sizeof(int) * op.b_index - array->size_a);
-	ft_memcpy(tmp, array->numbers + op.b_index, sizeof(int) * (array->size_top - op.b_index));
-	ft_memcpy(array->numbers + op.b_index, array->numbers + array->size_a, sizeof(int) * (op.b_index - array->size_a));
-	ft_memcpy(array->numbers + array->size_a, tmp, sizeof(int) * (op.b_index - array->size_a));
+	tmp = malloc(sizeof(int) * (op.b_index - array->size_a));
+	ft_memcpy(tmp, array->numbers + op.b_index -1, sizeof(int) * (op.b_index - array->size_a));
+	ft_memcpy(array->numbers + array->size_a, array->numbers + op.b_index, sizeof(int) * (array->size_top - op.b_index));
+	ft_memcpy(array->numbers + array->size_a + array->size_top - op.b_index, tmp, sizeof(int) * (op.b_index - array->size_a));
 	free(tmp);
 	array->size_a --;
 	array->size_b ++;
-	write (1, "pb\n", 3);
 	if (array->numbers[array->size_a] > array->big_b)
 	{
 		array->big_b = array->numbers[array->size_a];
