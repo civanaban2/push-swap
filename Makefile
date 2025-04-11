@@ -14,6 +14,11 @@ SRC =	$(DIR_SRC)/push_swap.c \
 		$(DIR_SRC)/arg_check.c \
 		$(DIR_SRC)/get_array.c \
 		$(DIR_SRC)/sort.c \
+		$(DIR_SRC)/sort_utils.c \
+		$(DIR_SRC)/print_utils.c \
+		$(DIR_SRC)/cost.c \
+		$(DIR_SRC)/cost_utils.c \
+		$(DIR_SRC)/sort_utils_2.c \
 
 INCLUDES_H = -I$(DIR_INC) -I$(DIR_LIBFT)
 INCLUDES_LIB = -L$(DIR_LIBFT) -l$(NAME_LIBFT)

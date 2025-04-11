@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urmet <urmet@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 22:45:52 by cari              #+#    #+#             */
-/*   Updated: 2025/04/11 01:53:10 by urmet            ###   ########.fr       */
+/*   Updated: 2025/04/11 23:21:15 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,16 @@ void	edge_cases(t_array *array);
 t_operation	calc_easiest(t_array *array);
 void	apply_operation(t_array *array, t_operation op);
 void	print_operations(t_operation op);
+void	get_cost(t_array *array, t_operation *op, int a_index, int b_index);
+void	calc_cost_forward(int a_part, int b_part, t_operation *op);
+void	calc_cost_backward(int a_part, int b_part, t_operation *op);
+void	calc_cost_af_bb(int a_part, int b_part, t_operation *op);
+void	calc_cost_ab_bf(int a_part, int b_part, t_operation *op);
+void	print_forward_op(int ra_count, int rb_count);
+void	print_backward_op(int ra_count, int rb_count);
+void	print_af_bb_op(int ra_count, int rb_count);
+void	print_ab_bf_op(int ra_count, int rb_count);
+void	get_new_values(t_array *array, t_operation op);
+void	make_biggest_first(t_array *array);
 
 #endif

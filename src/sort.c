@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urmet <urmet@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 18:30:25 by urmet             #+#    #+#             */
-/*   Updated: 2025/04/11 01:40:02 by urmet            ###   ########.fr       */
+/*   Updated: 2025/04/11 23:58:42 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,39 @@ void	push_easiest(t_array *array)
 
 	op = calc_easiest(array);
 	apply_operation(array, op);
+	write(1, "pb\n", 3);
 }
 
 void	push_back(t_array *array)
 {
-	if (array->size_a == 2)
+	int i;
+	int j;
+	
+	i = 0;
+	j = 0;
+	make_biggest_first(array);
+	if (array->size_a == 1)
 		sort_2(array);
 	else
 		sort_3(array);
-	while (array->b_stack != array->a_stack + array->size_top)
+	while (array->size_a < array->size_top -1)
 	{
+		while (i < 3)
+		{
+			if (array->a_stack[j] > array->b_stack[1])
+			{
+				j++;
+				write (1, "rra\n", 4);
+			}
+			i++;
+		}
+		i = j;
+		write (1, "pa\n", 3);
+		array->size_a++;
+		array->b_stack++;
 	}
+	while (j++ < 3)
+		write(1, "rra\n", 4);
 }
 
 void	edge_cases(t_array *array)

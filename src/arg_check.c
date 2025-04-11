@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urmet <urmet@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 22:39:09 by cari              #+#    #+#             */
-/*   Updated: 2025/04/10 13:12:00 by urmet            ###   ########.fr       */
+/*   Updated: 2025/04/11 19:17:48 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_isnumber(char *str)
 
 void	ft_isint(char *str)
 {
-	long long	num;
+	long	num;
 
 	num = ft_atol(str);
 	if (ft_strlen(str) > 11)
