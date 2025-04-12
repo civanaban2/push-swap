@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: urmet <urmet@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 18:31:10 by urmet             #+#    #+#             */
-/*   Updated: 2025/04/12 00:23:16 by cari             ###   ########.fr       */
+/*   Updated: 2025/04/12 05:20:55 by urmet            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,16 @@ void	get_new_values(t_array *array, t_operation op)
 		array->big_b_index = array->size_a;
 	}
 	else if (array->a_stack[array->size_a] < array->low_b)
+	{
 		array->low_b = array->a_stack[array->size_a];
+		array->big_b_index -= op.rb_count;
+		if (array->big_b_index < array->size_a - 1)
+			array->big_b_index += array->size_top - array->size_a - 1;
+	}
 	else
 	{
-		array->big_b_index -= op.b_index - array->size_a;
-		if (array->big_b_index < array->size_a)
-			array->big_b_index += array->size_top - array->size_a; 
+		array->big_b_index -= op.rb_count;
+		if (array->big_b_index < array->size_a - 1)
+			array->big_b_index += array->size_top - array->size_a - 1; 
 	}
 }
