@@ -10,6 +10,8 @@ DIR_LIBFT = libft
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
+ARG = ""
+
 SRC =	$(DIR_SRC)/push_swap.c \
 		$(DIR_SRC)/arg_check.c \
 		$(DIR_SRC)/get_array.c \
@@ -50,4 +52,10 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+test: $(BUILD) checker/checker_linux
+	@make -s tester
+	
+tester:
+	-@$(BUILD) $(ARG) | checker/checker_linux $(ARG)
+
+.PHONY: all clean fclean re test tester

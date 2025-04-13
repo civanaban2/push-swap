@@ -6,7 +6,7 @@
 /*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 01:19:01 by urmet             #+#    #+#             */
-/*   Updated: 2025/04/12 00:45:57 by cari             ###   ########.fr       */
+/*   Updated: 2025/04/13 04:09:57 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,36 @@ t_operation	calc_easiest(t_array *array)
 	{
 		while (b_index < array->size_top)
 		{
-			if (array->a_stack[a_index] < array->low_b
-				|| array->a_stack[a_index] > array->big_b)
-			{
-				get_cost(array, &op, a_index, array->big_b_index);
-				break;
-			}
-			else if (array->a_stack[a_index] < array->a_stack[b_index]
-				&& array->a_stack[a_index] > array->a_stack[b_index + 1])
-			{
-				if (b_index +1 == array->size_top)
-					get_cost(array, &op, a_index, array->size_a);
-				else
-					get_cost(array, &op, a_index, b_index + 1);
-			}
+			if (find_index(array, a_index, b_index, &op))
+				break ;
 			b_index++;
 		}
 		a_index++;
 		b_index = array->size_a;
 	}
 	return (op);
+}
+
+int	find_index(t_array *array, int a_index, int b_index, t_operation *op)
+{
+	if (array->a_stack[a_index] < array->low_b
+		|| array->a_stack[a_index] > array->big_b)
+	{
+		get_cost(array, op, a_index, array->big_b_index);
+		return (1);
+	}
+	else if (b_index == array->size_top - 1)
+	{
+		get_cost(array, op, a_index, array->size_a);
+		return (1);
+	}
+	else if (array->a_stack[a_index] < array->a_stack[b_index]
+		&& array->a_stack[a_index] > array->a_stack[b_index + 1])
+	{
+		get_cost(array, op, a_index, b_index + 1);
+		return (1);
+	}
+	return (0);
 }
 
 void	get_cost(t_array *array, t_operation *op, int a_index, int b_index)
@@ -55,7 +65,7 @@ void	get_cost(t_array *array, t_operation *op, int a_index, int b_index)
 	int	b_backward;
 	int	cost_first;
 
-	a_forward = array->size_a - a_index -1;
+	a_forward = array->size_a - a_index - 1;
 	a_backward = a_index + 1;
 	b_forward = b_index - array->size_a;
 	b_backward = array->size_top - b_index;

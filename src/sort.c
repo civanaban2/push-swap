@@ -6,7 +6,7 @@
 /*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 18:30:25 by urmet             #+#    #+#             */
-/*   Updated: 2025/04/11 23:58:42 by cari             ###   ########.fr       */
+/*   Updated: 2025/04/13 02:19:12 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,46 +39,28 @@ void	push_easiest(t_array *array)
 
 void	push_back(t_array *array)
 {
-	int i;
-	int j;
-	
-	i = 0;
-	j = 0;
 	make_biggest_first(array);
-	if (array->size_a == 1)
-		sort_2(array);
+	array->size_a++;
+	array->b_stack++;
+	if (array->size_a == 2)
+		sort_2(array->a_stack);
 	else
-		sort_3(array);
-	while (array->size_a < array->size_top -1)
-	{
-		while (i < 3)
-		{
-			if (array->a_stack[j] > array->b_stack[1])
-			{
-				j++;
-				write (1, "rra\n", 4);
-			}
-			i++;
-		}
-		i = j;
-		write (1, "pa\n", 3);
-		array->size_a++;
-		array->b_stack++;
-	}
-	while (j++ < 3)
-		write(1, "rra\n", 4);
+		sort_3(array->a_stack);
+	merge(array);
 }
 
 void	edge_cases(t_array *array)
 {
 	if (array->size_top == 2)
 	{
-		sort_2(array);
+		sort_2(array->a_stack);
+		free(array->a_stack);
 		exit(0);
 	}
 	else if (array->size_top == 3)
 	{
-		sort_3(array);
+		sort_3(array->a_stack);
+		free(array->a_stack);
 		exit(0);
 	}
 }
