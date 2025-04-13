@@ -6,13 +6,13 @@
 /*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 22:39:09 by cari              #+#    #+#             */
-/*   Updated: 2025/04/13 00:39:17 by cari             ###   ########.fr       */
+/*   Updated: 2025/04/13 05:12:32 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_isnumber(char *str)
+void	ft_isnumber(char *str, char **args, int free)
 {
 	int	i;
 
@@ -28,13 +28,15 @@ void	ft_isnumber(char *str)
 		if (str[i] < '0' || str[i] > '9')
 		{
 			write(2, "Error\n", 6);
+			if (free != 0)
+				free_split(args);
 			exit(1);
 		}
 		i++;
 	}
 }
 
-void	ft_isint(char *str)
+void	ft_isint(char *str, char **args, int free)
 {
 	long	num;
 
@@ -42,16 +44,20 @@ void	ft_isint(char *str)
 	if (ft_strlen(str) > 11)
 	{
 		write(2, "Error\n", 6);
+		if (free != 0)
+			free_split(args);
 		exit(1);
 	}
 	if (num > 2147483647 || num < -2147483648)
 	{
 		write(2, "Error\n", 6);
+		if (free != 0)
+			free_split(args);
 		exit(1);
 	}
 }
 
-void	ft_isunique(int argc, char **argv)
+void	ft_isunique(int argc, char **argv, int free)
 {
 	int	i;
 	int	j;
@@ -65,6 +71,8 @@ void	ft_isunique(int argc, char **argv)
 			if (ft_atoi(argv[i -1]) == ft_atoi(argv[j -1]))
 			{
 				write(2, "Error\n", 6);
+				if (free != 0)				
+					free_split(argv);
 				exit(1);
 			}
 			j++;
@@ -94,11 +102,11 @@ char	**arg_check(int argc, char **argv)
 		args = &argv[1];
 	while (i < argc)
 	{
-		ft_isnumber(args[i - 1]);
-		ft_isint(args[i - 1]);
+		ft_isnumber(args[i - 1], args, j);
+		ft_isint(args[i - 1], args, j);
 		i++;
 	}
-	ft_isunique(argc, args);
+	ft_isunique(argc, args, j);
 	return (args);
 }
 
@@ -114,5 +122,6 @@ void	ft_sorted_control(t_array *array)
 		i++;
 	}
 	free(array->a_stack);
+	
 	exit(0);
 }

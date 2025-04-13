@@ -6,7 +6,7 @@
 /*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 22:45:52 by cari              #+#    #+#             */
-/*   Updated: 2025/04/13 04:10:26 by cari             ###   ########.fr       */
+/*   Updated: 2025/04/13 05:06:21 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,7 @@ void		make_biggest_first(t_array *array);
 void		merge(t_array *array);
 t_array		get_array(char **args);
 t_operation	calc_easiest(t_array *array);
+void	free_split(char **split);
+
 
 #endif
