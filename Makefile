@@ -13,7 +13,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 SRC =	$(DIR_SRC)/push_swap.c \
 		$(DIR_SRC)/arg_check.c \
 		$(DIR_SRC)/arg_check_utils.c \
-		$(DIR_SRC)/arg_check_utils2.c \
+		$(DIR_SRC)/arg_check_utils_2.c \
 		$(DIR_SRC)/sort.c \
 		$(DIR_SRC)/sort_utils.c \
 		$(DIR_SRC)/sort_utils_2.c \

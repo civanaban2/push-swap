@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: urmet <urmet@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 23:17:05 by cari              #+#    #+#             */
-/*   Updated: 2025/04/13 02:12:43 by cari             ###   ########.fr       */
+/*   Updated: 2025/04/13 21:56:38 by urmet            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ int	final_rra(t_array *array, int turn)
 {
 	static int	i;
 	int			rra_count;
+	static int	flag;
 
+	if (flag <= 1)
+		flag++;
 	rra_count = 0;
 	if (i == turn)
 		return (i);
@@ -57,7 +60,7 @@ int	final_rra(t_array *array, int turn)
 		else
 			break ;
 	}
-	if (rra_count != turn)
+	if (rra_count != turn || flag != 1)
 	{
 		while (rra_count--)
 			write(1, "rra\n", 4);
