@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: urmet <urmet@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 22:45:52 by cari              #+#    #+#             */
-/*   Updated: 2025/04/13 05:06:21 by cari             ###   ########.fr       */
+/*   Updated: 2025/04/13 21:21:31 by urmet            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ typedef struct s_operation
 }	t_operation;
 
 int			final_rra(t_array *array, int turn);
+int			count_numbers(int argc, const char **argv);
 int			find_index(t_array *array, int a_index,
 				int b_index, t_operation *op);
-char		**arg_check(int argc, char **argv);
+void		arg_check(int argc, const char **argv);
 void		ft_sorted_control(t_array *array);
 void		sort(t_array *array);
 void		sort_init(t_array *array);
@@ -62,9 +63,16 @@ void		print_ab_bf_op(int ra_count, int rb_count);
 void		get_new_values(t_array *array, t_operation op);
 void		make_biggest_first(t_array *array);
 void		merge(t_array *array);
-t_array		get_array(char **args);
+void		get_array(t_array *array, int argc, const char **argv);
+void		free_split(char **split);
+void		ft_null_control(int argc, const char **argv);
+void		ft_char_control(int argc, const char **argv);
+void		ft_empty_control(int argc, const char **argv);
+void		ft_sign_control(int argc, const char **argv);
+void		ft_number_control(int argc, const char **argv);
+void		ft_maxmin_control(int argc, const char **argv);
+void		ft_unique_control(t_array *array);
+void		ft_sorted_control(t_array *array);
 t_operation	calc_easiest(t_array *array);
-void	free_split(char **split);
-
 
 #endif

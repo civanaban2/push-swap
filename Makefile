@@ -10,17 +10,16 @@ DIR_LIBFT = libft
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
-ARG = ""
-
 SRC =	$(DIR_SRC)/push_swap.c \
 		$(DIR_SRC)/arg_check.c \
-		$(DIR_SRC)/get_array.c \
+		$(DIR_SRC)/arg_check_utils.c \
+		$(DIR_SRC)/arg_check_utils2.c \
 		$(DIR_SRC)/sort.c \
 		$(DIR_SRC)/sort_utils.c \
+		$(DIR_SRC)/sort_utils_2.c \
 		$(DIR_SRC)/print_utils.c \
 		$(DIR_SRC)/cost.c \
 		$(DIR_SRC)/cost_utils.c \
-		$(DIR_SRC)/sort_utils_2.c \
 		$(DIR_SRC)/free_split.c \
 
 INCLUDES_H = -I$(DIR_INC) -I$(DIR_LIBFT)
@@ -45,7 +44,6 @@ $(OBJ): %.o: %.c
 
 clean:
 	rm -f $(OBJ)
-	make -C $(DIR_LIBFT) clean
 
 fclean: clean
 	rm -rf $(DIR_BUILD)
