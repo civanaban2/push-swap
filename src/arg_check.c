@@ -6,7 +6,7 @@
 /*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 22:39:09 by cari              #+#    #+#             */
-/*   Updated: 2025/04/13 05:12:32 by cari             ###   ########.fr       */
+/*   Updated: 2025/04/13 05:16:32 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ void	ft_isnumber(char *str, char **args, int free)
 	int	i;
 
 	i = 0;
+	if (str == NULL)
+	{
+		write(2, "Error\n", 6);
+		if (free != 0)
+			free_split(args);
+		exit(1);
+	}
 	while (str[i])
 	{
 		if (i == 0 && (str[i] == '-' || str[i] == '+')
@@ -85,10 +92,12 @@ char	**arg_check(int argc, char **argv)
 {
 	int		i;
 	int		j;
+	int		free;
 	char	**args;
 
 	i = 1;
 	j = 0;
+	free = 0;
 	if (argc == 1)
 		exit(1);
 	else if (argc == 2)
@@ -97,16 +106,17 @@ char	**arg_check(int argc, char **argv)
 		while (args[j])
 			j++;
 		argc = j + 1;
+		free = 1;
 	}
 	else
 		args = &argv[1];
 	while (i < argc)
 	{
-		ft_isnumber(args[i - 1], args, j);
-		ft_isint(args[i - 1], args, j);
+		ft_isnumber(args[i - 1], args, free);
+		ft_isint(args[i - 1], args, free);
 		i++;
 	}
-	ft_isunique(argc, args, j);
+	ft_isunique(argc, args, free);
 	return (args);
 }
 
