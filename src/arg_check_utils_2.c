@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_check_utils2.c                                 :+:      :+:    :+:   */
+/*   arg_check_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urmet <urmet@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:20:54 by urmet             #+#    #+#             */
-/*   Updated: 2025/04/13 21:20:23 by urmet            ###   ########.fr       */
+/*   Updated: 2025/04/15 01:23:07 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_maxmin_control(int argc, const char **argv)
 	char	**numbers;
 
 	i = 1;
+	j = 0;
 	while (i < argc)
 	{
 		numbers = ft_split(argv[i], ' ');

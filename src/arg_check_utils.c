@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_check_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urmet <urmet@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:12:22 by urmet             #+#    #+#             */
-/*   Updated: 2025/04/13 21:14:38 by urmet            ###   ########.fr       */
+/*   Updated: 2025/04/15 01:21:02 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_char_control(int argc, const char **argv)
 	int	j;
 
 	i = 1;
+	j = 0;
 	while (i < argc)
 	{
 		while (argv[i][j])
