@@ -6,7 +6,7 @@
 /*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:20:54 by urmet             #+#    #+#             */
-/*   Updated: 2025/04/15 01:23:07 by cari             ###   ########.fr       */
+/*   Updated: 2025/04/15 01:32:09 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_maxmin_control(int argc, const char **argv)
 	j = 0;
 	while (i < argc)
 	{
-		numbers = ft_split(argv[i], ' ');
+		numbers = ft_split(argv[i++], ' ');
 		while (numbers[j])
 		{
 			num = ft_atol(numbers[j]);
@@ -37,7 +37,6 @@ void	ft_maxmin_control(int argc, const char **argv)
 			j++;
 		}
 		free_split(numbers);
-		i++;
 		j = 0;
 	}
 }
@@ -55,7 +54,7 @@ void	get_array(t_array *array, int argc, const char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		numbers = ft_split(argv[i], ' ');
+		numbers = ft_split(argv[i++], ' ');
 		while (numbers[j])
 		{
 			array->a_stack[array->size_top - array->size_a - 1]
@@ -64,7 +63,6 @@ void	get_array(t_array *array, int argc, const char **argv)
 			array->size_a++;
 		}
 		free_split(numbers);
-		i++;
 		j = 0;
 	}
 	ft_unique_control(array);
@@ -83,14 +81,13 @@ int	count_numbers(int argc, const char **argv)
 	count = 0;
 	while (i < argc)
 	{
-		numbers = ft_split(argv[i], ' ');
+		numbers = ft_split(argv[i++], ' ');
 		while (numbers[j])
 		{
 			count++;
 			j++;
 		}
 		free_split(numbers);
-		i++;
 		j = 0;
 	}
 	return (count);
