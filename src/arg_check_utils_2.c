@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/13 20:20:54 by urmet             #+#    #+#             */
-/*   Updated: 2025/04/15 01:32:09 by cari             ###   ########.fr       */
+/*   Created: 2025/04/15 04:07:10 by cari              #+#    #+#             */
+/*   Updated: 2025/04/15 04:51:39 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_maxmin_control(int argc, const char **argv)
 		{
 			num = ft_atol(numbers[j]);
 			if (num > 2147483647 || num < -2147483648
-				|| ft_strlen(numbers[j]) > 11)
+				|| ft_zero_control(numbers[j]) > 11)
 			{
 				write(2, "Error\n", 6);
 				free_split(numbers);

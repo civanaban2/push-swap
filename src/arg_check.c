@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urmet <urmet@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 22:39:09 by cari              #+#    #+#             */
-/*   Updated: 2025/04/13 21:44:04 by urmet            ###   ########.fr       */
+/*   Created: 2025/04/15 04:07:24 by cari              #+#    #+#             */
+/*   Updated: 2025/04/15 04:52:31 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,24 @@ void	arg_check(int argc, const char **argv)
 	ft_sign_control(argc, argv);
 	ft_number_control(argc, argv);
 	ft_maxmin_control(argc, argv);
+}
+
+int	ft_zero_control(const char *str)
+{
+	int	i;
+	int	zero;
+
+	i = 0;
+	zero = 0;
+	if (str[0] == '-' || str[0] == '+')
+		i++;
+	while (str[i])
+	{
+		if (str[i] == '0')
+			zero++;
+		else
+			break ;
+		i++;
+	}
+	return (ft_strlen(str) - zero);
 }

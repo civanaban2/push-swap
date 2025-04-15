@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urmet <urmet@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cari <cari@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 22:45:52 by cari              #+#    #+#             */
-/*   Updated: 2025/04/13 21:21:31 by urmet            ###   ########.fr       */
+/*   Created: 2025/04/15 04:07:01 by cari              #+#    #+#             */
+/*   Updated: 2025/04/15 04:51:08 by cari             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int			final_rra(t_array *array, int turn);
 int			count_numbers(int argc, const char **argv);
 int			find_index(t_array *array, int a_index,
 				int b_index, t_operation *op);
+int			ft_zero_control(const char *str);
 void		arg_check(int argc, const char **argv);
 void		ft_sorted_control(t_array *array);
 void		sort(t_array *array);
