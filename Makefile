@@ -8,7 +8,7 @@ DIR_INC = inc
 DIR_LIBFT = libft
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 SRC =	$(DIR_SRC)/push_swap.c \
 		$(DIR_SRC)/arg_check.c \
